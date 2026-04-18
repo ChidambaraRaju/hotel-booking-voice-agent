@@ -33,39 +33,26 @@ export interface AppConfig {
 }
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
-  companyName: 'LiveKit',
-  pageTitle: 'LiveKit Voice Agent',
-  pageDescription: 'A voice agent built with LiveKit',
+  companyName: 'Grand Hotel',
+  pageTitle: 'Hotel Booking Voice Agent',
+  pageDescription: 'A voice AI agent for hotel room booking',
 
-  supportsChatInput: true,
-  supportsVideoInput: true,
-  supportsScreenShare: true,
+  supportsChatInput: false,
+  supportsVideoInput: false,
+  supportsScreenShare: false,
   isPreConnectBufferEnabled: true,
 
   logo: '/lk-logo.svg',
   accent: '#002cf2',
   logoDark: '/lk-logo-dark.svg',
   accentDark: '#1fd5f9',
-  startButtonText: 'Start call',
+  startButtonText: 'Call Hotel Agent',
 
   // optional: audio visualization configuration
-  // audioVisualizerType: 'bar',
-  // audioVisualizerColor: '#002cf2',
-  // audioVisualizerColorDark: '#1fd5f9',
-  // audioVisualizerColorShift: 0.3,
-  // audioVisualizerBarCount: 5,
-  // audioVisualizerType: 'radial',
-  // audioVisualizerRadialBarCount: 24,
-  // audioVisualizerRadialRadius: 100,
-  // audioVisualizerType: 'grid',
-  // audioVisualizerGridRowCount: 25,
-  // audioVisualizerGridColumnCount: 25,
-  // audioVisualizerType: 'wave',
-  // audioVisualizerWaveLineWidth: 3,
-  // audioVisualizerType: 'aura',
+  audioVisualizerType: 'wave',
 
   // agent dispatch configuration
-  agentName: process.env.AGENT_NAME ?? undefined,
+  agentName: process.env.AGENT_NAME ?? 'hotel-agent',
 
   // LiveKit Cloud Sandbox configuration
   sandboxId: undefined,
