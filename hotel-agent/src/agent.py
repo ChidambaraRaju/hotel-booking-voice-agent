@@ -128,13 +128,14 @@ class HotelAgent(Agent):
             # Format bookings for the agent to read
             result = []
             for i, booking in enumerate(response.data, 1):
+                booking_id = booking["id"]
                 booking_date = booking["booking_date"][:10]  # Extract date part
                 room = booking["room_type"]
                 days = booking["num_days"]
                 features = booking.get("additional_features", {})
 
                 result.append(
-                    f"Booking {i}: Room type {room}, "
+                    f"Booking {i}: ID {booking_id}, Room type {room}, "
                     f"Check-in date {booking_date}, Duration {days} days. "
                     f"Features: {features}"
                 )
@@ -189,7 +190,7 @@ class HotelAgent(Agent):
 
             if response.data:
                 booking_id = response.data[0]["id"]
-                return f"Booking created successfully! Your booking ID is {booking_id[:8]}... for a {room_type} room starting {booking_date} for {num_days} days."
+                return f"Booking created successfully! Your booking ID is {booking_id} for a {room_type} room starting {booking_date} for {num_days} days."
             else:
                 return "Booking was created but no data returned."
 
