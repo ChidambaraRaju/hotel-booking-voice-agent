@@ -15,6 +15,7 @@ dependencies = [
     { name = "livekit-agents", extra = ["silero", "turn-detector"] },
     { name = "livekit-plugins-ai-coustics" },
     { name = "livekit-plugins-groq" },
+    { name = "livekit-plugins-minimax-ai" },
     { name = "livekit-plugins-sarvam" },
     { name = "python-dotenv" },
     { name = "supabase" },
@@ -32,6 +33,7 @@ requires-dist = [
     { name = "livekit-agents", extras = ["silero", "turn-detector"], specifier = "~=1.5" },
     { name = "livekit-plugins-ai-coustics", specifier = "~=0.2" },
     { name = "livekit-plugins-groq", specifier = "~=1.0" },
+    { name = "livekit-plugins-minimax-ai", specifier = "~=1.5" },
     { name = "livekit-plugins-sarvam", specifier = "~=1.0" },
     { name = "python-dotenv" },
     { name = "supabase", specifier = "~=2.0" },
@@ -1272,6 +1274,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ca/b9/6587f9a4a30f935eee7135df2cd1bbb14719e1badd580495357ee42ff3ab/livekit_plugins_groq-1.5.4.tar.gz", hash = "sha256:0df1dee2681a58bb8ed82c2916e38c8181d757273ce0b7c9729b8396d9f4e817", size = 6139, upload-time = "2026-04-16T04:51:31.692Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1b/6f/d1e24a6fba3ff0f0a972f0c91645588e5a6f00c8dd71c4ad581009f431a8/livekit_plugins_groq-1.5.4-py3-none-any.whl", hash = "sha256:3bd2785d4373130cbde5c641d60e3fb1ab5486e862d324b364a66e7f7fbf5009", size = 7323, upload-time = "2026-04-16T04:51:30.647Z" },
+]
+
+[[package]]
+name = "livekit-plugins-minimax-ai"
+version = "1.5.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "livekit-agents", extra = ["codecs"] },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c0/7e/f0bd066c9baf7e70594ba78f3bbbea59d546f5d17c872c35d7c6143ea3ab/livekit_plugins_minimax_ai-1.5.4.tar.gz", hash = "sha256:ea2efbf9074573eb8acf474f879e5a64b1af0e8f7329d678c0d8915ca700ecb4", size = 10286, upload-time = "2026-04-16T04:52:01.047Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/97/79/72e9740a4bee0aaa057ad0b10600d131c0429e4ff9943910b24b9b450890/livekit_plugins_minimax_ai-1.5.4-py3-none-any.whl", hash = "sha256:d74e3cd0dbc14b51cadac1e350fcb71dbde5bc3e5f4b43d715e65ef2a39aff25", size = 10501, upload-time = "2026-04-16T04:51:59.658Z" },
 ]
 
 [[package]]

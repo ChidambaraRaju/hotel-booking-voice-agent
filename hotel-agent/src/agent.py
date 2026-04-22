@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from typing import Annotated
 
 from dotenv import load_dotenv
@@ -30,6 +31,7 @@ from livekit.agents import (
 from livekit.plugins import groq, silero
 from livekit.plugins.sarvam import STT as sarvam_stt  # noqa: N811
 from livekit.plugins.sarvam import TTS as sarvam_tts  # noqa: N811
+from livekit.plugins import minimax
 from supabase import Client, create_client
 
 # Load environment variables from .env.local
@@ -324,6 +326,19 @@ async def hotel_agent_session(ctx: JobContext):
     logger.info("Starting hotel agent session")
 
     # Initialize the voice pipeline with Sarvam STT/TTS and Groq LLM
+
+    # Get TTS provider from environment
+    tts_provider = os.getenv("TTS_PROVIDER", "sarvam").lower()
+    if tts_provider == "minimax":
+        tts = minimax.TTS(
+            model="speech-2.8-hd",  # MiniMax latest HD model
+        )
+    else:
+        tts = sarvam_tts(
+            model="bulbul:v3",
+            target_language_code="en-IN",  # English (India)
+        )
+
     session = AgentSession(
         # STT: Speech-to-Text - converts user's voice to text
         # Using Sarvam Saaras v3 for Indian English
@@ -339,11 +354,7 @@ async def hotel_agent_session(ctx: JobContext):
         ),
 
         # TTS: Text-to-Speech - converts agent's text response to voice
-        # Using Sarvam Bulbul v3 for natural Indian English voice
-        tts=sarvam_tts(
-            model="bulbul:v3",
-            target_language_code="en-IN",  # English (India)
-        ),
+        tts=tts,
 
         # VAD: Voice Activity Detection - detects when user is speaking
         vad=ctx.proc.userdata["vad"],

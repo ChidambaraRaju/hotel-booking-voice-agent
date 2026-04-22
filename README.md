@@ -10,7 +10,7 @@ A voice AI agent for hotel room booking powered by LiveKit Agents. Guests call i
 - **Agent**: Python LiveKit Agents SDK
 - **STT**: Sarvam AI Saaras v3
 - **LLM**: GroqCloud
-- **TTS**: Sarvam AI Bulbul v3
+- **TTS**: MiniMax Speech 2.8 HD (configurable: also supports Sarvam AI Bulbul v3)
 - **Database**: Supabase
 
 ## Project Structure
@@ -44,8 +44,9 @@ A voice AI agent for hotel room booking powered by LiveKit Agents. Guests call i
 - Node.js >= 20
 - LiveKit Cloud account
 - Supabase account
-- Sarvam AI API key
+- Sarvam AI API key (for STT)
 - Groq API key
+- MiniMax API key (for TTS)
 
 ### Environment Variables
 
@@ -59,6 +60,9 @@ SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_KEY=
 SARVAM_API_KEY=
 GROQ_API_KEY=
+MINIMAX_API_KEY=
+MINIMAX_GROUP_ID=
+TTS_PROVIDER=minimax  # Options: "minimax" or "sarvam"
 ```
 
 **Frontend** (`frontend/.env.local`):
