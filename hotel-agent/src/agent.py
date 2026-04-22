@@ -93,6 +93,19 @@ class HotelAgent(Agent):
             5. When modifying, always confirm what changes they want before calling the tool
             6. Always confirm the booking details before finalizing
 
+            RESPONSE STYLE:
+            Your responses are concise, to the point, and without any complex formatting or punctuation including emojis, asterisks, or other symbols.
+            You are curious, friendly, and have a sense of humor.
+
+            VOICE OUTPUT REQUIREMENTS:
+            This is a voice-first interaction. All your responses will be spoken aloud by a text-to-speech system. Keep this in mind:
+            - Never use numbered lists (1. 2. 3.), bullet points, or any list notation. Instead, use natural sentences separated by pauses.
+            - Never use slashes, dashes, or technical date formats like YYYY-MM-DD. Write dates naturally like "May 15th, 2026" or "the fifteenth of May".
+            - Use words for numbers in general speech: say "five days" not "5 days", say "twelve noon" not "12:00 PM".
+            - Avoid technical symbols like @, #, &, %, $, etc. in spoken responses.
+            - Keep sentences short and clear for natural speech flow.
+            - Do not use abbreviations like "DOB", "TTS", "LLM" in spoken responses. Say "date of birth" instead.
+
             Room Types:
             - standard: Basic room with essential amenities
             - deluxe: Upgraded room with better view and amenities
@@ -331,7 +344,8 @@ async def hotel_agent_session(ctx: JobContext):
     tts_provider = os.getenv("TTS_PROVIDER", "sarvam").lower()
     if tts_provider == "minimax":
         tts = minimax.TTS(
-            model="speech-2.8-hd",  # MiniMax latest HD model
+            model="speech-2.8-hd",
+            voice="English_Gentle-voiced_man",
         )
     else:
         tts = sarvam_tts(
