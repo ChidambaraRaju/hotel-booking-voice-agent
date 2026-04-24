@@ -14,7 +14,7 @@ from __future__ import annotations
 import json
 import logging
 import os
-from typing import Annotated
+from typing import Annotated, Optional
 
 from dotenv import load_dotenv
 from livekit import agents
@@ -223,10 +223,10 @@ class HotelAgent(Agent):
         customer_name: Annotated[str, "The customer's full name"],
         dob: Annotated[str, "The customer's date of birth in YYYY-MM-DD format"],
         booking_id: Annotated[str, "The booking ID to modify"],
-        new_booking_date: Annotated[str, "New check-in date in YYYY-MM-DD format (optional)"] = None,
-        new_num_days: Annotated[int, "New number of days (optional)"] = None,
-        new_room_type: Annotated[str, "New room type: standard, deluxe, or suite (optional)"] = None,
-        new_additional_features: Annotated[str, "New additional features as JSON string (optional)"] = None
+        new_booking_date: Annotated[Optional[str], "New check-in date in YYYY-MM-DD format (optional)"] = None,
+        new_num_days: Annotated[Optional[int], "New number of days (optional)"] = None,
+        new_room_type: Annotated[Optional[str], "New room type: standard, deluxe, or suite (optional)"] = None,
+        new_additional_features: Annotated[Optional[str], "New additional features as JSON string (optional)"] = None
     ) -> str:
         """Modify an existing booking"""
         logger.info(f"Modifying booking {booking_id} for: {customer_name}")
