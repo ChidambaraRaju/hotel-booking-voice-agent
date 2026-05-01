@@ -279,34 +279,6 @@ Open [http://localhost:3000](http://localhost:3000) and click **Call Hotel Agent
 
 ---
 
-## Deployment
-
-### Voice Agent (LiveKit Cloud)
-
-The Python agent can be deployed to LiveKit Cloud via Docker. Build the image and deploy using the LiveKit Cloud dashboard or CLI. Set the following environment variables in LiveKit Cloud secrets:
-
-- `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`
-- `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY`
-- `SARVAM_API_KEY`, `GROQ_API_KEY`, `MINIMAX_API_KEY`, `MINIMAX_GROUP_ID`
-- `TTS_PROVIDER`
-
-Do **not** set `LIVEKIT_URL`, `LIVEKIT_API_KEY`, or `LIVEKIT_API_SECRET` as build arguments or in the Dockerfile — these are injected at runtime by LiveKit Cloud.
-
-### Frontend (Vercel)
-
-```bash
-cd frontend
-vercel deploy
-```
-
-Set the following environment variables in Vercel:
-
-- `VITE_LIVEKIT_URL`
-- `VITE_LIVEKIT_API_KEY`
-- `NEXT_PUBLIC_CONN_DETAILS_ENDPOINT` (optional — only needed for sandbox token mode)
-
----
-
 ## Available Scripts
 
 ### Agent
@@ -345,22 +317,3 @@ cd hotel-agent && uv sync && uv run mypy src/ && uv run pytest
 cd frontend && pnpm build && pnpm lint
 ```
 
----
-
-## Troubleshooting
-
-### "ws_url is required" error
-
-LiveKit reads `LIVEKIT_URL` at import time. Ensure `load_dotenv(".env.local")` is called **before** importing any LiveKit modules. See `hotel-agent/src/agent.py` line 19–20.
-
-### Agent connects but doesn't respond
-
-Check that the agent dispatch name in LiveKit Cloud matches `agentName` in `frontend/app-config.ts` (`hotel-agent`).
-
-### Microphone not working in browser
-
-Ensure the page is served over **HTTPS** (or `localhost`). browsers block microphone access on HTTP in production.
-
-### Supabase errors
-
-Verify `SUPABASE_SERVICE_KEY` is the service role key (not the anon key). The anon key only has insert/select permissions, but the agent also needs update/delete for modify/cancel operations.
