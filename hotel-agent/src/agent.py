@@ -351,6 +351,7 @@ async def hotel_agent_session(ctx: JobContext):
         tts = minimax.TTS(
             model="speech-2.8-hd",
             voice="English_Gentle-voiced_man",
+            speed=1.1,
         )
     else:
         tts = sarvam_tts(
