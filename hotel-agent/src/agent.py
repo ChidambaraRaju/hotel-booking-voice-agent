@@ -6,7 +6,8 @@ Guests call in, authenticate via name + DOB, and can view/create/modify/cancel b
 
 STT: Sarvam Saaras v3
 LLM: Groq (openai/gpt-oss-20b)
-TTS: Sarvam Bulbul v3
+TTS: Sarvam Bulbul v3 or Minimax Speech-2.8-HD (configurable via TTS_PROVIDER env var)
+Database: Supabase (PostgreSQL) for storing bookings
 """
 
 from __future__ import annotations
@@ -16,7 +17,10 @@ import logging
 import os
 from typing import Annotated, Optional
 
+# Load environment variables FIRST, before any LiveKit imports
 from dotenv import load_dotenv
+load_dotenv(".env.local")
+
 from livekit import agents
 from livekit.agents import (
     Agent,
@@ -92,6 +96,7 @@ class HotelAgent(Agent):
                - Any additional features (breakfast, late checkout, spa, etc.)
             5. When modifying, always confirm what changes they want before calling the tool
             6. Always confirm the booking details before finalizing
+            7. Never share the booking ID with the user. Keep it internal only.
 
             RESPONSE STYLE:
             Your responses are concise, to the point, and without any complex formatting or punctuation including emojis, asterisks, or other symbols.
@@ -395,7 +400,12 @@ async def hotel_agent_session(ctx: JobContext):
     # Wait for user to connect
     await ctx.connect()
 
-    logger.info("Agent session started, waiting for user")
+    # Greet the user first
+    await session.generate_reply(
+        instructions="Greet the user warmly and ask for their name and date of birth for authentication."
+    )
+
+    logger.info("Agent session started, greeted user")
 
 
 if __name__ == "__main__":
