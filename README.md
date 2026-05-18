@@ -2,16 +2,6 @@
 
 A real-time voice AI agent for hotel room booking, built with [LiveKit Agents](https://livekit.io). Guests call in through a web browser, authenticate via name + date of birth, and can fully manage their reservations — view, create, modify, or cancel — using natural voice conversation.
 
-> **Status:** Ready for deployment. See [Quick Start](#quick-start) to get running.
-
----
-
-## Live Demo
-
-**Try it now:** [hotel-booking-voice-agent.vercel.app](https://hotel-booking-voice-agent.vercel.app)
-
-Click **Call Hotel Agent**, allow microphone access, and speak to the agent. It will greet you and ask for your name and date of birth to get started.
-
 ---
 
 ## Features
@@ -46,14 +36,14 @@ Click **Call Hotel Agent**, allow microphone access, and speak to the agent. It 
 
 | Layer | Technology |
 |------|------------|
-| **Frontend** | Next.js 14 (React 18), LiveKit Components, Tailwind CSS |
+| **Frontend** | Next.js 15 (React 19), LiveKit Components, Tailwind CSS |
 | **Voice Agent** | Python 3.10+, LiveKit Agents SDK |
 | **Speech-to-Text** | Sarvam AI Saaras v3 (en-IN) |
 | **LLM** | GroqCloud — `openai/gpt-oss-20b` |
 | **Text-to-Speech** | MiniMax Speech-2.8-HD (default) or Sarvam AI Bulbul v3 |
 | **VAD** | Silero VAD (Voice Activity Detection) |
 | **Database** | Supabase (PostgreSQL) |
-| **Infrastructure** | LiveKit Cloud (WebRTC), Vercel (frontend) |
+| **Infrastructure** | LiveKit Cloud (WebRTC) |
 
 ---
 
@@ -116,8 +106,7 @@ hotel-booking-voice-agent/
 │   ├── src/
 │   │   └── agent.py           # HotelAgent class + tools + LiveKit server
 │   ├── pyproject.toml         # Dependencies (uv)
-│   ├── .env.local             # API keys and secrets
-│   └── docs/                  # Architecture docs
+│   └── .env.local             # API keys and secrets
 │
 ├── frontend/                   # Next.js web app
 │   ├── app/
@@ -129,11 +118,7 @@ hotel-booking-voice-agent/
 │   │   ├── agents-ui/        # LiveKit session UI components
 │   │   └── ui/               # shadcn/ui component library
 │   ├── hooks/                # Custom React hooks
-│   ├── styles/               # Tailwind + theme CSS
 │   └── app-config.ts         # App configuration
-│
-├── docs/
-│   └── plans/               # Design and implementation plans
 │
 ├── CLAUDE.md                # Developer instructions
 ├── PROJECT.md               # Project specification
@@ -192,8 +177,12 @@ TTS_PROVIDER=minimax
 ### Frontend (`frontend/.env.local`)
 
 ```env
-VITE_LIVEKIT_URL=wss://your-project.livekit.cloud
-VITE_LIVEKIT_API_KEY=your_api_key
+LIVEKIT_API_KEY=your_api_key
+LIVEKIT_API_SECRET=your_api_secret
+LIVEKIT_URL=wss://your-project.livekit.cloud
+AGENT_NAME=
+NEXT_PUBLIC_APP_CONFIG_ENDPOINT=
+SANDBOX_ID=
 ```
 
 ### Frontend Config (`frontend/app-config.ts`)
@@ -254,7 +243,7 @@ cp hotel-agent/.env.example hotel-agent/.env.local
 
 # frontend/.env.local
 cp frontend/.env.example frontend/.env.local
-# Fill in VITE_LIVEKIT_URL and VITE_LIVEKIT_API_KEY
+# Fill in all values
 ```
 
 ### 4. Run the voice agent
