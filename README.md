@@ -2,6 +2,8 @@
 
 A real-time voice AI agent for hotel room booking, built with [LiveKit Agents](https://livekit.io). Guests call in through a web browser, authenticate via name + date of birth, and can fully manage their reservations — view, create, modify, or cancel — using natural voice conversation.
 
+![Cover](hotel-agent/images/Cover%20Image.png)
+
 ---
 
 ## Features
